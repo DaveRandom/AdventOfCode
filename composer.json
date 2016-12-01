@@ -1,0 +1,16 @@
+{
+    "name": "daverandom/advent-of-code",
+    "description": "Advent of code",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Wright",
+            "email": "adventofcode@daverandom.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "DaveRandom\\AdventOfCode\\": "src/" },
+        "files": [ "src/functions.php" ]
+    }
+}
