@@ -8,21 +8,12 @@ class Direction
     const TURN_LEFT = -1;
 
     private $turn;
-    private $distance = '';
+    private $distance;
 
-    public function addChar(string $char)
+    public function __construct(string $spec)
     {
-        static $turns = ['R' => self::TURN_RIGHT, 'L' => self::TURN_LEFT];
-
-        if (in_array($char, [' ', "\r", "\n", "\t"])) {
-            return;
-        }
-
-        if (!isset($this->turn)) {
-            $this->turn = $turns[$char];
-        } else {
-            $this->distance .= $char;
-        }
+        $this->turn = ['R' => self::TURN_RIGHT, 'L' => self::TURN_LEFT][$spec[0]];
+        $this->distance = (int)substr($spec, 1);
     }
 
     public function getTurn(): int
@@ -32,6 +23,6 @@ class Direction
 
     public function getDistance(): int
     {
-        return (int)$this->distance;
+        return $this->distance;
     }
 }

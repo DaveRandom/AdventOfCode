@@ -5,7 +5,7 @@ namespace DaveRandom\AdventOfCode\Year2016\Day1;
 class Journey
 {
     private $bearing = 0;
-    private $coordinates = [0, 0];
+    private $currentCoordinates = [0, 0];
 
     private $moves = 0;
 
@@ -37,9 +37,9 @@ class Journey
         $increment = $this->bearing > 1 ? -1 : 1;
 
         for ($i = 0, $l = $direction->getDistance(); $i < $l; $i++) {
-            $this->coordinates[$dimension] += $increment;
+            $this->currentCoordinates[$dimension] += $increment;
 
-            $key = self::getCoordinateKey($this->coordinates);
+            $key = self::getCoordinateKey($this->currentCoordinates);
 
             $this->coordinateLastVisits[$key] = $this->moves;
 
@@ -51,7 +51,7 @@ class Journey
 
     public function getCurrentDistanceFromStart()
     {
-        return self::getCoordinateDistanceFromStart($this->coordinates);
+        return self::getCoordinateDistanceFromStart($this->currentCoordinates);
     }
 
     public function getFirstRevisitedCoordinateDistanceFromStart()

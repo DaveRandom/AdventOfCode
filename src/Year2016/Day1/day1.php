@@ -3,25 +3,15 @@
 
 namespace DaveRandom\AdventOfCode\Year2016\Day1;
 
-use function DaveRandom\AdventOfCode\app_init;
+use DaveRandom\AdventOfCode\Utils\ByteDelimitedStreamIterator;
 
 require __DIR__ . '/../../../vendor/autoload.php';
 
-$fp = app_init();
-
 $journey = new Journey();
-$direction = new Direction();
 
-while (false !== $char = fgetc($fp)) {
-    if ($char !== ',') {
-        $direction->addChar($char);
-    } else {
-        $journey->followDirection($direction);
-        $direction = new Direction();
-    }
+foreach (ByteDelimitedStreamIterator::fromInput(',') as $direction) {
+    $journey->followDirection(new Direction($direction));
 }
-
-$journey->followDirection($direction);
 
 echo "
   Final coordinate distance from start:           {$journey->getCurrentDistanceFromStart()}
